@@ -1,0 +1,78 @@
+###
+
+# curl -X POST "http://localhost:8080/airlines/" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"turkish airlines\"}"
+POST http://localhost:8080/airlines/
+accept: */*
+Content-Type: application/json
+
+{
+  "name": "turkish airlines"
+}
+
+###
+
+# curl -X POST "http://localhost:8080/airports/" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"ank\"}"
+POST http://localhost:8080/airports/
+accept: */*
+Content-Type: application/json
+
+{
+  "name": "ist"
+}
+
+###
+
+# curl -X POST "http://localhost:8080/airports/" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"ank\"}"
+POST http://localhost:8080/airports/
+accept: */*
+Content-Type: application/json
+
+{
+  "name": "ank"
+}
+
+###
+
+# curl -X POST "http://localhost:8080/routes/" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"istanbuldan ankaraya rota\",\"from\":{\"id\":2},\"to\":{\"id\":3},\"distance\":500}"
+POST http://localhost:8080/routes/
+accept: */*
+Content-Type: application/json
+
+{
+  "name": "istanbuldan ankaraya rota",
+  "from": {
+    "id": 2
+  },
+  "to": {
+    "id": 3
+  },
+  "distance": 500
+}
+
+###
+
+# curl -X POST "http://localhost:8080/flights/" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"name\":\"istanbuldan ankaraya turk hava yollari ile 1 temmuz 13:00 ucusu\",\"route\":{\"id\":4,\"from\":{\"id\":2},\"to\":{\"id\":3}},\"airline\":{\"id\":1},\"date\":\"2020-07-01\",\"time\":\"11:00:00\"}"
+POST http://localhost:8080/flights/
+accept: */*
+Content-Type: application/json
+
+{
+  "name": "istanbuldan ankaraya turk hava yollari ile 1 temmuz 13:00 ucusu",
+  "route": {
+    "id": 4,
+    "from": {
+      "id": 2
+    },
+    "to": {
+      "id": 3
+    }
+  },
+  "airline": {
+    "id": 1
+  },
+  "date": "2020-07-01",
+  "time": "11:00"
+}
+
+###
+
