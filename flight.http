@@ -70,9 +70,33 @@ Content-Type: application/json
   "airline": {
     "id": 1
   },
+  "quota": 100,
+  "sold": 0,
+  "price": 10,
   "date": "2020-07-01",
   "time": "11:00"
 }
 
 ###
+
+# curl -X POST "http://localhost:8080/tickets/" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"gender\":\"MALE\",\"name\":\"faruk\",\"lastName\":\"kaya\",\"age\":30,\"email\":\"faruk.kaya@ibb.gov.tr\",\"phoneNumber\":\"5378340009333\",\"flight\":{\"id\":5},\"creditCardNumber\":\"1234-1234-1234-1234\"}"
+POST http://localhost:8080/tickets/
+accept: */*
+Content-Type: application/json
+
+{
+  "gender": "MALE",
+  "name": "faruk",
+  "lastName": "kaya",
+  "age": 30,
+  "email": "faruk.kaya@ibb.gov.tr",
+  "phoneNumber": "5378340009",
+  "flight": {
+    "id": 5
+  },
+  "creditCardNumber": "1234-1234-1234-1234"
+}
+
+###
+
 

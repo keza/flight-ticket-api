@@ -1,10 +1,19 @@
 package com.finartz.flight.ticketapi.service;
 
+import com.finartz.flight.ticketapi.exception.EntityNotFoundException;
+import com.finartz.flight.ticketapi.exception.GlobalException;
 import com.finartz.flight.ticketapi.model.dto.TicketRequest;
+import com.finartz.flight.ticketapi.model.dto.TicketResponse;
+import com.finartz.flight.ticketapi.model.entity.Flight;
+import com.finartz.flight.ticketapi.model.entity.Ticket;
 import com.finartz.flight.ticketapi.repository.TicketRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class TicketService {
@@ -12,22 +21,67 @@ public class TicketService {
     @Autowired
     TicketRepository repository;
 
-    public String checkout (String request) throws Exception {
-        //String validCardNumber = creditCardNumberReplace(request.getCreditCardNumber());
-            request = creditCardNumberReplace(request);
-        if (StringUtils.isBlank(request) || request.length() != 16) {
-            return "hatali kart";
+    @Autowired
+    FlightService flightService;
+
+    @Autowired
+    ModelMapper modelMapper;
+
+    public TicketResponse findById(Long id) throws EntityNotFoundException {
+        Ticket ticket = repository.findById(id).orElse(null);
+
+        if (ticket == null) {
+            throw new EntityNotFoundException(Ticket.class, "id", id.toString());
         }
 
-        return maskString(request,6,12, '*');
+        return mapTicketToTicketResponse(ticket);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Transactional
+    public TicketResponse checkout (TicketRequest request) throws Exception {
+        Flight flight = null;
+        String validCardNumber = creditCardNumberReplace(request.getCreditCardNumber());
+
+        if (StringUtils.isBlank(validCardNumber) || validCardNumber.length() != 16) {
+            throw new GlobalException(TicketRequest.class, "Kredi kartı numarası 16 hane olmalıdır");
+        }
+        validCardNumber = maskString(validCardNumber,6,12, '*');
+
+        flight = flightService.findById(request.getFlight().getId());
+
+        Ticket ticket = modelMapper.map(request, Ticket.class);
+        ticket.setCreditCardNumber(validCardNumber);
+        ticket.setPrice(flight.getPrice());
+
+        flightService.ticketSold(flight);
+
+        ticket = repository.save(ticket);
+
+        return mapTicketToTicketResponse(ticket);
+    }
+
+    private TicketResponse mapTicketToTicketResponse(Ticket ticket) {
+        TicketResponse response = null;
+
+        ModelMapper responseMapper = new ModelMapper();
+        TypeMap<Ticket, TicketResponse> typeMap = responseMapper.createTypeMap(Ticket.class,TicketResponse.class);
+        typeMap.addMappings(mapper -> {
+            mapper.map(src -> src.getId(), TicketResponse::setTicketNumber);
+        });
+
+        response = responseMapper.map(ticket,TicketResponse.class);
+        return response;
     }
 
     private String creditCardNumberReplace(String creditCardNumber) {
         return creditCardNumber.replaceAll("[^0-9]", "");
     }
 
-    private static String maskString(String strText, int start, int end, char maskChar)
-            throws Exception{
+    private static String maskString(String strText, int start, int end, char maskChar) throws Exception{
 
         if(strText == null || strText.equals(""))
             return "";

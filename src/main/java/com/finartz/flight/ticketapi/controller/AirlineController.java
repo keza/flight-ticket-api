@@ -1,9 +1,11 @@
 package com.finartz.flight.ticketapi.controller;
 
+import com.finartz.flight.ticketapi.exception.EntityNotFoundException;
 import com.finartz.flight.ticketapi.model.entity.Airline;
 import com.finartz.flight.ticketapi.service.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class AirlineController {
     }
 
     @GetMapping("/{id}")
-    public Airline findById(@PathVariable("id") Long id) {
+    public Airline findById(@PathVariable("id") Long id) throws EntityNotFoundException {
         return service.findById(id);
     }
 
@@ -31,7 +33,7 @@ public class AirlineController {
     }
 
     @GetMapping("/airlines")
-    public List<Airline> findName(@RequestParam("name") String name) {
+    public List<Airline> findName(@RequestParam("name") String name) throws EntityNotFoundException {
         return service.findName(name);
     }
 }

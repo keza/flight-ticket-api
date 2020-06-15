@@ -1,5 +1,6 @@
 package com.finartz.flight.ticketapi.controller;
 
+import com.finartz.flight.ticketapi.exception.EntityNotFoundException;
 import com.finartz.flight.ticketapi.model.entity.Route;
 import com.finartz.flight.ticketapi.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class RouteController {
     }
 
     @GetMapping("/{id}")
-    public Route findById(@PathVariable("id") Long id) {
+    public Route findById(@PathVariable("id") Long id) throws EntityNotFoundException {
         return service.findById(id);
     }
 
@@ -31,7 +32,7 @@ public class RouteController {
     }
 
     @GetMapping("/routes")
-    public List<Route> findName(@RequestParam("name") String name) {
+    public List<Route> findName(@RequestParam("name") String name) throws EntityNotFoundException {
         return service.findName(name);
     }
 }

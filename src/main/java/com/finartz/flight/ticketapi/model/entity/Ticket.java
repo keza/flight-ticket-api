@@ -4,10 +4,7 @@ import com.finartz.flight.ticketapi.model.enums.Gender;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -26,7 +23,9 @@ public class Ticket {
     @NotBlank(message = "Soyad alanı boş olamaz.")
     private String lastName;
 
-    @Size(min = 0, max = 100, message = "Yaş minimum 0 maksimum 100")
+    @NotNull(message = "Yaş alanı boş olamaz.")
+    @Min(0)
+    @Max(100)
     private Integer age;
 
     @Email(message = "E-posta geçerli değildir.")

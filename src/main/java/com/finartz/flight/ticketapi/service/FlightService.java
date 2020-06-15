@@ -1,11 +1,10 @@
 package com.finartz.flight.ticketapi.service;
 
+import com.finartz.flight.ticketapi.exception.EntityNotFoundException;
 import com.finartz.flight.ticketapi.model.entity.Flight;
 import com.finartz.flight.ticketapi.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,10 +14,10 @@ public class FlightService {
     @Autowired
     FlightRepository repository;
 
-    public Flight findById(Long id) {
+    public Flight findById(Long id) throws EntityNotFoundException {
         Flight flight = repository.findById(id).orElse(null);
         if (flight == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException(Flight.class,"id", id.toString());
         }
         return flight;
     }
@@ -32,11 +31,17 @@ public class FlightService {
         return flights;
     }
 
-    public List<Flight> findName(String name) {
+    public List<Flight> findName(String name) throws EntityNotFoundException {
         List<Flight> flights = repository.findByNameContaining(name);
         if(flights.size()==0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException(Flight.class,"name", name.toString());
         }
         return flights;
+    }
+
+    public Flight ticketSold(Flight flight) {
+        flight.setSold(flight.getSold()+1);
+        flight = repository.save(flight);
+        return flight;
     }
 }

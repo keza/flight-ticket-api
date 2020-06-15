@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -25,7 +27,8 @@ public class Flight {
     @OneToOne
     private Airline airline;
 
-    @Size(min = 50, max = 500, message = "Kontenjan minimum 50 maksimum 500")
+    @Min(0)
+    @Max(100)
     private Integer quota;
 
     private Integer sold;

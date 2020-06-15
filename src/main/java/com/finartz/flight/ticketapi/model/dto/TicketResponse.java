@@ -11,7 +11,9 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.*;
 
 @Data
-public class TicketRequest {
+public class TicketResponse {
+
+    private Long ticketNumber;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -36,7 +38,6 @@ public class TicketRequest {
     @Pattern(regexp = "(5[0-9]{9})", message = "Cep telefonu geçerli değildir. Cep telefonu numarasınızı kontrol ediniz.")
     private String phoneNumber;
 
-    @NotNull(message = "Uçuş boş olamaz.")
     @OneToOne
     private Flight flight;
 

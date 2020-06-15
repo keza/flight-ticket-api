@@ -1,11 +1,10 @@
 package com.finartz.flight.ticketapi.service;
 
+import com.finartz.flight.ticketapi.exception.EntityNotFoundException;
 import com.finartz.flight.ticketapi.model.entity.Route;
 import com.finartz.flight.ticketapi.repository.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,10 +14,10 @@ public class RouteService {
     @Autowired
     RouteRepository repository;
 
-    public Route findById(Long id) {
+    public Route findById(Long id) throws EntityNotFoundException {
         Route route = repository.findById(id).orElse(null);
         if (route == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException(Route.class,"id", id.toString());
         }
         return route;
     }
@@ -32,10 +31,10 @@ public class RouteService {
         return routes;
     }
 
-    public List<Route> findName(String name) {
+    public List<Route> findName(String name) throws EntityNotFoundException {
         List<Route> routes = repository.findByNameContaining(name);
         if(routes.size()==0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException(Route.class,"name", name.toString());
         }
         return routes;
     }
