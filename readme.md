@@ -42,3 +42,7 @@ docker build -t finartz.com/java/ticket-api:latest .
 
 docker run --rm -p 8080:8080 finartz.com/java/ticket-api
 ```
+
+## Swagger URL
+
+http://localhost:8080/swagger-ui.html
