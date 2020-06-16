@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -27,7 +26,7 @@ public class Flight {
     @OneToOne
     private Airline airline;
 
-    @Min(0)
+    @Min(50)
     @Max(100)
     private Integer quota;
 
@@ -44,4 +43,18 @@ public class Flight {
     @JsonFormat(pattern = "HH:mm")
     private Date time;
 
+    public void setSold(Integer sold) {
+        this.sold = sold;
+
+        if (sold>0) {
+            int bolen = (quota * 10) / 100;
+            int kalan = sold % bolen;
+
+            if (kalan == 0) {
+                double yeniFiyat = this.price * 1.10;
+                double formatlanmis = Double.parseDouble(String.format("%.2f", yeniFiyat));
+                setPrice(formatlanmis);
+            }
+        }
+    }
 }
