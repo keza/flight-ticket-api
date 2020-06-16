@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "f16049ce-14ad-4ef9-8058-2026181c7470",
+		"name": "flight-ticket-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Airline",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airlines/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airlines",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Turk Hava Yolları\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/airlines/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airlines",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airlines/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airlines",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airlines/airlines?name=Turk",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airlines",
+								"airlines"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Turk"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Airport",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airports/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airports",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"İstanbul Havalimanı\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/airports/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airports",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airports/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airports",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airports/airports?name=Hava",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airports",
+								"airports"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Hava"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/routes/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"istanbuldan ankaraya rota\",\n  \"from\": {\n    \"id\": 3\n  },\n  \"to\": {\n    \"id\": 4\n  },\n  \"distance\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/routes/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/routes/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"routes",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/routes/routes?name=rota",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"routes",
+								"routes"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "rota"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Flight",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/flights/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"istanbuldan ankaraya turk hava yollari ile 1 temmuz 13:00 ucusu\",\n  \"route\": {\n    \"id\": 6\n  },\n  \"airline\": {\n    \"id\": 1\n  },\n  \"quota\": 100,\n  \"sold\": 0,\n  \"price\": 10,\n  \"date\": \"2020-07-01\",\n  \"time\": \"11:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/flights/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/flights/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/flights/flights?name=temmuz",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								"flights"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "temmuz"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "find",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tickets/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"gender\": \"MALE\",\n  \"name\": \"faruk\",\n  \"lastName\": \"kaya\",\n  \"age\": 30,\n  \"email\": \"faruk.kaya@ibb.gov.tr\",\n  \"phoneNumber\": \"5378340009\",\n  \"flight\": {\n    \"id\": 7\n  },\n  \"creditCardNumber\": \"1234-1234-1234-1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tickets/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tickets/29",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"29"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actuator/health",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
